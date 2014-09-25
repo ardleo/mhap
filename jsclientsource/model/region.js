@@ -5,4 +5,4 @@ mhap.region = function(data){
 	this.desc = data.desc;
 	this.image = data.image;
 	this.tooltipInfo = data.tooltipInfo;
-}
+};

@@ -4,4 +4,4 @@ mhap.user = function(data){
 	this.role = data.role;
 	this.email = data.email;
 	this.pic = data.pic;
-}
+};

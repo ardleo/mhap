@@ -1,12 +1,27 @@
 <?php
 	class webpage{
-		function settings($f3){
-			$settings=new DB\SQL\Mapper( $f3->get("DB") ,"settings");
-			$settings->load();
-			return $settings;
+		protected $config;
+		public function __construct($f3) {
+			$this->config = new config(  $f3->get("DB")  );
+			$this->config->getConfig();
 		}
 		
 		function dashboard($f3){
+			$f3->set('title','Dashboard');
+			$f3->set('mainPanel', './front/' . $this->config->read( 'dashboard', 'dashboard_main_panel' )->value);
+			$menu = new menu( $f3->get("DB") );
+			$f3->set('menus', $menu->all(NULL));	
+			echo Template::instance()->render('/front/dashboard.php');
+		}
+		
+		function events($f3){
+			$f3->set('title','Events');
+			$f3->set('mainPanel', './front/calender.php');
+			$menu = new menu( $f3->get("DB") );
+			
+			$f3->set('menus', $menu->all());
+			
+			echo Template::instance()->render('/front/events.php');
 		}
 		
 		function adminpanel($f3){
@@ -15,11 +30,8 @@
 		}
 		
 		function login($f3){
-			$f3->set('title','Login');
-			$f3->set('content','/front/welcome.htm');
-			$f3->set('front_theme', '/themes/' + $this->settings( $f3 )->front_themes);
-			$f3->set('admin_theme', '/themes/' + $this->settings( $f3 )->admin_themes);
-			$f3->set('fruits',array('apple','orange ',' banana'));
+			$f3->set('title','Login');	
+			
 			echo Template::instance()->render('/front/login.php');
 		}
 		

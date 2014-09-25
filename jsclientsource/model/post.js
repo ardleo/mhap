@@ -3,4 +3,4 @@ mhap.post = function(data){
 	this.title = data.title;
 	this.content = data.content;
 	this.image = data.image;
-}
+};

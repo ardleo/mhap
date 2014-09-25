@@ -7,4 +7,4 @@ mhap.file = function(data){
 	this.voteup = data.voteup;
 	this.votedown = data.votedown;
 	this.uploader = new mhap.user( data.uploader );
-}
+};

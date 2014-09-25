@@ -10,4 +10,4 @@ mhap.residence = function(data){
 	this.totalHouse = data.totalHouse;
 	this.available = data.available;
 	this.productionDate = data.productionDate;
-}
+};

@@ -22,7 +22,6 @@ $f3->route('GET /*', function($f3){
 	$f3->reroute("/dashboard");
 });
 
-
 // REST request by id
 $f3->route('GET /rest/@controller/@action/@id', '@controller->@action');
 // REST request per request
@@ -34,15 +33,14 @@ $f3->route('POST /rest/@controller/@action/@id', '@controller->@action');
 // REST create
 $f3->route('POST /rest/@controller/@action', '@controller->@action');
 
+// general route
+$f3->route('GET /post', 'post->view');
+$f3->route('GET /post/@id', 'post->view');
 $f3->route('GET /dashboard', 'webpage->dashboard');
+$f3->route('GET /events', 'webpage->events');
 $f3->route('GET /admin-panel', 'webpage->adminpanel');
 $f3->route('GET /login', 'webpage->login');
 
-$f3->route('GET /userref',
-	function($f3) {
-		$f3->set('content','userref.htm');
-		echo View::instance()->render('layout.htm');
-	}
-);
+
 
 $f3->run();

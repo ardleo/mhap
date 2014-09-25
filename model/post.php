@@ -1,10 +1,18 @@
 <?php
 class post{
+	protected $config;
+	public function __construct($f3) {
+		$this->config = new config(  $f3->get("DB")  );
+		$this->config->getConfig();
+    }
+	
+		
 	function create( $f3 ){
 	
 	}
 	
 	function read( $f3, $params ){	
+		
 		header('Content-Type: application/json');
 		if ( isset($params['id']) ) {
 			$data= $f3->get("DB")->exec("call getPost(". $params['id'] . ")");			
@@ -28,5 +36,16 @@ class post{
 	
 	}
 	
+	function view( $f3, $params ){
+		if ( isset($params['id']) ) {
+			$f3->set('data', $f3->get("DB")->exec("call getPost(". $params['id'] . ")") );	
+		}else{
+			$f3->set('data', $f3->get("DB")->exec("call getAllPost(0,22)") );	
+			
+		}
+		$f3->set('title','Article');
+		$f3->set('mainPanel', './front/article.php');
+		echo Template::instance()->render('/front/dashboard.php');
+	}
 }
 ?>
